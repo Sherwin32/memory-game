@@ -1,4 +1,4 @@
-//to make sure the js file is connected to index.html
+//Just to make sure the js file is connected to index.html
 console.log("Up and running!");
 
 var cards = [
@@ -26,6 +26,8 @@ var cards = [
 
 var cardsInPlay = [];
 
+//If cardsInPlay.length < 2, flip the card and wait for the next card.
+//If cardsInPlay.length = 2, tell the player if he found a match or not.
 function checkForMatch(){
 	var cardId = this.getAttribute('data-id');
 	this.setAttribute('src', cards[cardId].cardImage);
@@ -40,23 +42,23 @@ function checkForMatch(){
 	}
 }
 
+//Get the card data-id and push that card into the cardsInPlay array
 function flipCard(){
 	var cardId = this.getAttribute('data-id'); 
-	console.log("User flipped " + cards[cardId].rank);
-	console.log("cardImage: " + cards[cardId].cardImage);
-	console.log("suit: " + cards[cardId].suit);
 	cardsInPlay.push(cards[cardId].rank);
 }
 
+//To reset the game
+//Set the cards to the back one by one using for loop, then clear the cardInPlay array.
 function resetButton(){
 	for (var i = 0; i < cards.length; i++){
 		var cardElement = document.getElementById('card'+i);
-		console.log(cardElement.id);
 		cardElement.setAttribute('src', 'images/back.png');
 	}
 	cardsInPlay = [];
 }
 
+//Start the game by creating the four cards
 function createBoard(){
 	for (var i = 0; i < cards.length; i++) {
 		var cardElement = document.createElement('img');
